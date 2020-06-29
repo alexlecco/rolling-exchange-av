@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, StatusBar } from 'react-native'
 import {
   Provider as PaperProvider,
   Button,
@@ -7,8 +7,12 @@ import {
 import colors from './src/constants/colors'
 
 export default function App() {
+
   return (
     <PaperProvider>
+      {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+      {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
+
       <View style={styles.container}>
         <View style={styles.card}>
           <Text style={styles.text}>Rolling Exchange</Text>
@@ -22,6 +26,10 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  statusBarUnderlay: {
+    height: 28,
+    backgroundColor: colors.background1,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.background1,
