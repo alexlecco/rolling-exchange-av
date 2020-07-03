@@ -1,18 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View, StatusBar } from 'react-native'
-import {
-  useTheme,
-  Provider as PaperProvider,
-  Button,
-} from 'react-native-paper'
-import colors from './src/constants/colors'
+import { Provider as PaperProvider } from 'react-native-paper'
 import TopContainer from './src/components/TopContainer'
 import CurrenciesContainer from './src/components/Content/CurrenciesContainer'
 import BottomContainer from './src/components/BottomContainer'
 
-export default function App() {
-  const { colors } = useTheme();
+//import { darkTheme as theme }  from './src/constants/colors'
+import { lightTheme as theme }  from './src/constants/colors'
 
+export default function App() {
   return (
     <PaperProvider>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
@@ -29,6 +25,6 @@ export default function App() {
 const styles = StyleSheet.create({
   statusBarUnderlay: {
     height: 40,
-    backgroundColor: colors.container2,
+    backgroundColor: theme.secondary,
   }
 });

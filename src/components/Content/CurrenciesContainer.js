@@ -2,6 +2,9 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import CurrencyCard from './CurrencyCard'
 
+//import { darkTheme as theme }  from '../../constants/colors'
+import { lightTheme as theme }  from '../../constants/colors'
+
 const CurrenciesContainer = () => (
   <View style={styles.curranciesContainer}>
     <CurrencyCard currency="USD" />
@@ -13,7 +16,7 @@ const CurrenciesContainer = () => (
 const styles = StyleSheet.create({
   curranciesContainer: {
     flex: 8,
-    backgroundColor: colors.background1,
+    backgroundColor: theme.primary,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',

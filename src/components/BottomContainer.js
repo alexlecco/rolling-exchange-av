@@ -1,16 +1,18 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { Button } from 'react-native-paper';
-import colors from '../constants/colors'
+
+//import { darkTheme as theme }  from '../constants/colors'
+import { lightTheme as theme }  from '../constants/colors'
 
 const BottomContainer= () => (
   <View style={styles.bottomContainer}>
-    <Button icon="update" style={styles.button} />
+    <Button color={theme.link} icon="update" style={styles.button} />
     <View>
-      <Text>Ultima actualización</Text>
-      <Text>4 de Julio de 2020</Text>
+      <Text style={styles.updateText}>Ultima actualización</Text>
+      <Text style={styles.updateText}>4 de Julio de 2020</Text>
     </View>
-    <Button icon="theme-light-dark" style={styles.button} />
+    <Button color={theme.link} icon="theme-light-dark" style={styles.button} />
   </View>
 )
 
@@ -21,10 +23,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     width: '100%',
-    backgroundColor: colors.background2,
+    backgroundColor: theme.secondary,
+  },
+  updateText: {
+    color: theme.textSecondary,
   },
   button: {
-    color: colors.link1,
     paddingLeft: 15,
   }
 });

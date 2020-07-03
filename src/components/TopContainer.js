@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper';
-import colors from '../constants/colors'
+
+//import { darkTheme as theme } from '../constants/colors'
+import { lightTheme as theme } from '../constants/colors'
 
 const TopContainer= () => {
   const [input, setInput] = useState('');
@@ -22,12 +24,12 @@ const TopContainer= () => {
 
 const styles = StyleSheet.create({
   bottomContainer: {
-    flex: 1,
+    flex: 1.6,
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
     width: '100%',
-    backgroundColor: colors.background2,
+    backgroundColor: theme.secondary,
   },
   input: {
     width: '60%',
