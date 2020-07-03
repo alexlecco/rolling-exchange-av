@@ -28,7 +28,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   statusBarUnderlay: {
-    height: 27,
+    height: 40,
     backgroundColor: colors.container2,
   }
 });
