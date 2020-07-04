@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from 'react-native'
 import { Button } from 'react-native-paper';
 
 //import { darkTheme as theme }  from '../constants/colors'
-import { lightTheme as theme }  from '../constants/colors'
+import { darkTheme as theme }  from '../constants/colors'
 
 const BottomContainer= () => (
   <View style={styles.bottomContainer}>
@@ -12,7 +12,11 @@ const BottomContainer= () => (
       <Text style={styles.updateText}>Ultima actualización</Text>
       <Text style={styles.updateText}>4 de Julio de 2020</Text>
     </View>
-    <Button color={theme.link} icon="theme-light-dark" style={styles.button} />
+    <Button
+      color={theme.link}
+      icon="theme-light-dark"
+      style={styles.button}
+    />
   </View>
 )
 

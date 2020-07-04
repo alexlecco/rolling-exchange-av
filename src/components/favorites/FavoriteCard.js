@@ -6,7 +6,7 @@ import { darkTheme as theme } from '../../constants/colors'
 
 import images from '../../constants/flags';
 
-const CurrencyCard = ({ currency, flagURL }) => {
+const FavoriteCard = ({ currency, flagURL }) => {
   let url
   switch(flagURL) {
     case 'ars':
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CurrencyCard
+export default FavoriteCard

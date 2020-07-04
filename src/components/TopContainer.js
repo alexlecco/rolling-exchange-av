@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image, Dimensions } from 'react-native'
 import { TextInput } from 'react-native-paper';
 
 //import { darkTheme as theme } from '../constants/colors'
-import { lightTheme as theme } from '../constants/colors'
+import { darkTheme as theme } from '../constants/colors'
 
 const TopContainer= () => {
   const [input, setInput] = useState('');

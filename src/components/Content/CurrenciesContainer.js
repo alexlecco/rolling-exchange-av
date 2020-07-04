@@ -1,16 +1,22 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import React, { Fragment } from 'react'
+import { StyleSheet, View, Text } from 'react-native'
+import { Button } from 'react-native-paper'
 import CurrencyCard from './CurrencyCard'
 
 //import { darkTheme as theme }  from '../../constants/colors'
-import { lightTheme as theme }  from '../../constants/colors'
+import { darkTheme as theme }  from '../../constants/colors'
 
-const CurrenciesContainer = () => (
-  <View style={styles.curranciesContainer}>
-    <CurrencyCard currency="USD" flagURL={"usd"} />
-    <CurrencyCard currency="EUR" flagURL={"eur"} />
-    <CurrencyCard currency="JPY" flagURL={"jpy"} />
-  </View>
+const CurrenciesContainer = ({ changeScreen }) => (
+  <Fragment>
+    <Button onPress={() => changeScreen(true)}>
+      <Text style={styles.buttonText}>Agregar nueva Moneda</Text>
+    </Button>
+    <View style={styles.curranciesContainer}>
+      <CurrencyCard currency="USD" flagURL={"usd"} />
+      <CurrencyCard currency="EUR" flagURL={"eur"} />
+      <CurrencyCard currency="JPY" flagURL={"jpy"} />
+    </View>
+  </Fragment>
 )
 
 const styles = StyleSheet.create({
@@ -21,6 +27,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
   },
+  buttonText: {
+    color: theme.link
+  }
 });
 
 export default CurrenciesContainer
