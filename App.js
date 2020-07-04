@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Text, View, StatusBar } from 'react-native'
+import { StyleSheet, View, StatusBar } from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
 import TopContainer from './src/components/TopContainer'
 import CurrenciesContainer from './src/components/Content/CurrenciesContainer'

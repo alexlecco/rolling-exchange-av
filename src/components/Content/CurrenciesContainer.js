@@ -7,9 +7,9 @@ import { lightTheme as theme }  from '../../constants/colors'
 
 const CurrenciesContainer = () => (
   <View style={styles.curranciesContainer}>
-    <CurrencyCard currency="USD" />
-    <CurrencyCard currency="EUR" />
-    <CurrencyCard currency="YEN" />
+    <CurrencyCard currency="USD" flagURL={"usd"} />
+    <CurrencyCard currency="EUR" flagURL={"eur"} />
+    <CurrencyCard currency="JPY" flagURL={"jpy"} />
   </View>
 )
 
