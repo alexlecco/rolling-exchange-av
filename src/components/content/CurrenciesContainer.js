@@ -7,9 +7,9 @@ import { darkTheme as theme } from '../../constants/colors'
 
 const CurrenciesContainer = () => (
   <View style={styles.currenciesContainer}>
-    <CurrencyCard name="USD" />
-    <CurrencyCard name="EUR" />
-    <CurrencyCard name="JPY" />
+    <CurrencyCard name="ARS" flag={"ars"} />
+    <CurrencyCard name="EUR" flag={"eur"} />
+    <CurrencyCard name="JPY" flag={"jpy"} />
   </View>
 )
 
