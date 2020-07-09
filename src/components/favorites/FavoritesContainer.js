@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import FavoriteCard from './FavoriteCard';
 
 // lightTheme or darkTheme
-import { lightTheme as theme } from '../../constants/colors'
+import { darkTheme as theme } from '../../constants/colors'
 
 const FavoritesContainer = () => (
   <View style={styles.favoritesContainer}>

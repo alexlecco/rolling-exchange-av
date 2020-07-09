@@ -8,10 +8,10 @@ import { darkTheme as theme } from '../../constants/colors'
 
 const CurrenciesContainer = ({ changeScreen }) => (
   <>
-    <Button onPress={() => changeScreen(false)}>
-      <Text style={styles.button}>Agregar nueva moneda</Text>
-    </Button>
     <View style={styles.currenciesContainer}>
+      <Button onPress={() => changeScreen(false)} style={styles.button}>
+        <Text style={styles.buttonText}>Agregar nueva moneda</Text>
+      </Button>
       <CurrencyCard name="ARS" flag={"ars"} />
       <CurrencyCard name="EUR" flag={"eur"} />
       <CurrencyCard name="JPY" flag={"jpy"} />
@@ -28,7 +28,10 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   button: {
-    color: theme.link
+    backgroundColor: theme.primary,
+  },
+  buttonText: {
+    color: theme.link,
   }
 })
 

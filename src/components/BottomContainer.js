@@ -23,10 +23,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     flexDirection: 'row',
     width: '100%',
-    backgroundColor: theme.secondary,
+    backgroundColor: theme.primary,
   },
   updateText: {
-    color: theme.textSecondary,
+    color: theme.textPrimary,
   },
   button: {
     paddingLeft: 15,

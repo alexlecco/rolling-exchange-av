@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 
 // lightTheme or darkTheme
-import { lightTheme as theme } from '../../constants/colors'
+import { darkTheme as theme } from '../../constants/colors'
 
 import flags from '../../constants/flags'
 
@@ -49,4 +49,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FavoriteCard
+export default FavoriteCard 
