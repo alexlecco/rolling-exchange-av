@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import { TextInput } from 'react-native-paper'
+import { Button } from 'react-native-paper'
 
 const TopContainer = ({ appTheme, amount, setAmount }) => {
   const [ selectedCurrency ] = useState({name: 'USD', flag: 'usd'})
@@ -21,6 +22,12 @@ const TopContainer = ({ appTheme, amount, setAmount }) => {
         value={amount}
         onChangeText={amount => setAmount(amount)}
       />
+      {
+        amount !== '' ?
+          <Button onPress={() => setAmount('')} color={appTheme.link} icon="close" />
+        :
+          <View style={{width: 65}} />
+      }
     </View>
   )
 }

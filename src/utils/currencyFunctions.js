@@ -24,7 +24,7 @@ export const getExchange = (currency, amount) => {
   let exchange
   switch(currency) {
     case 'ars':
-      exchange = amount * 70.87
+      exchange = amount * 70.87 * 1.3
       return exchange.toFixed(2)
     case 'eur':
       exchange = amount * 0.89
