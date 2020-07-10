@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Image } from 'react-native'
 
 import flags from '../../constants/flags'
+import { getCurrencySymbol, getCurrencyName } from '../../utils/currencyFunctions'
 
 const CurrencyCard = ({ name, flag, appTheme, amount }) => {
   let url = ''
@@ -22,14 +23,24 @@ const CurrencyCard = ({ name, flag, appTheme, amount }) => {
 
   return(
     <View style={getStyle(appTheme, 'card')}>
-      <View style={getStyle(appTheme, 'flagContainer')}>
+      <View style={getStyle(appTheme, 'leftContainer')}>
         <Image
           source={url}
           style={{ width: 50, height: 50, marginRight: 10 }}
         />
         <Text style={getStyle(appTheme, 'text')}>{name}</Text>
       </View>
-      <Text style={getStyle(appTheme, 'text')}>{amount}</Text>
+      <View style={getStyle(appTheme, 'rightContainer')}>
+        {
+          amount !== '' ?
+            <>
+              <Text style={getStyle(appTheme, 'text')}>{getCurrencySymbol(flag)} {amount}</Text>
+              <Text style={getStyle(appTheme, 'text')}>{getCurrencyName(flag)}</Text>
+            </>
+          :
+            null
+        }
+      </View>
     </View>
   )
 }
@@ -50,12 +61,19 @@ const getStyle = (theme, component) => {
       return({
         color: theme.textPrimary,
       })
-    case 'flagContainer': 
+    case 'leftContainer': 
       return({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
+      })
+    case 'rightContainer': 
+      return({
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
       })
   }
 }
