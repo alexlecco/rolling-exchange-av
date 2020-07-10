@@ -15,6 +15,7 @@ export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
   const [ amount, setAmount ] = useState('')
+  const [ favoriteCurrencies ] = useState([])
 
   const updateTheme = () => {
     appTheme.name === 'darkTheme' ? setAppTheme(lightTheme) : setAppTheme(darkTheme)
@@ -30,7 +31,12 @@ export default function App() {
         (
           <Fragment>
             <TopContainer appTheme={appTheme} amount={amount} setAmount={setAmount} />
-            <CurrenciesContainer appTheme={appTheme} changeScreen={setMainVisible} amount={amount} />
+            <CurrenciesContainer
+              appTheme={appTheme}
+              changeScreen={setMainVisible}
+              amount={amount}
+              favoriteCurrencies={favoriteCurrencies}
+            />
             <BottomContainer appTheme={appTheme} updateTheme={updateTheme} />
           </Fragment>
         )
@@ -38,7 +44,9 @@ export default function App() {
         (
           <Fragment>
             <FavoritesSearchbar appTheme={appTheme} changeScreen={setMainVisible} />
-            <FavoritesContainer appTheme={appTheme} />
+            <FavoritesContainer
+              appTheme={appTheme}
+            />
           </Fragment>
         )
       }
