@@ -6,6 +6,7 @@ import CurrenciesContainer from './src/components/content/CurrenciesContainer'
 import BottomContainer from './src/components/BottomContainer'
 import FavoritesSearchbar from './src/components/favorites/FavoritesSearchbar'
 import FavoritesContainer from './src/components/favorites/FavoritesContainer'
+import currencies from './src/constants/currencies'
 
 import { darkTheme } from './src/constants/colors'
 import { lightTheme } from './src/constants/colors'
@@ -15,10 +16,23 @@ export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
   const [ amount, setAmount ] = useState('')
-  const [ favoriteCurrencies ] = useState([])
-
+  const [ favoriteCurrencies, setFavoriteCurrencies ] = useState([])
+  const [ allCurrencies, setAllCurrencies ] =
+    useState(currencies.map(currency => ({...currency, isFavorite: false})))
+  
   const updateTheme = () => {
     appTheme.name === 'darkTheme' ? setAppTheme(lightTheme) : setAppTheme(darkTheme)
+  }
+
+  const updateFavoriteCurrencies = newCurrency => {
+    setFavoriteCurrencies(prevState => [...prevState, newCurrency])
+  }
+  
+  const updateCurrency = (name, isFavorite) => {
+    let temp_allCurrencies = allCurrencies
+    const objIndex = allCurrencies.findIndex((obj => obj.name === name));
+    temp_allCurrencies[objIndex].isFavorite = !isFavorite
+    setAllCurrencies(temp_allCurrencies)
   }
 
   return (
@@ -35,7 +49,7 @@ export default function App() {
               appTheme={appTheme}
               changeScreen={setMainVisible}
               amount={amount}
-              favoriteCurrencies={favoriteCurrencies}
+              allCurrencies={allCurrencies}
             />
             <BottomContainer appTheme={appTheme} updateTheme={updateTheme} />
           </Fragment>
@@ -46,6 +60,9 @@ export default function App() {
             <FavoritesSearchbar appTheme={appTheme} changeScreen={setMainVisible} />
             <FavoritesContainer
               appTheme={appTheme}
+              updateFavoriteCurrencies={updateFavoriteCurrencies}
+              allCurrencies={allCurrencies}
+              updateCurrency={updateCurrency}
             />
           </Fragment>
         )

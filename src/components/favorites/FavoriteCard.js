@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import { Button } from 'react-native-paper'
 
 import flags from '../../constants/flags'
 
-const FavoriteCard = ({ name, flag, appTheme }) => {
+const FavoriteCard = ({ name, flag, appTheme, updateFavoriteCurrencies, isFavorite, updateCurrency }) => {
   let url = ''
   switch(flag) {
     case 'ars':
@@ -20,6 +20,11 @@ const FavoriteCard = ({ name, flag, appTheme }) => {
       url = flags.usd
       break
   }
+  
+  const onSelectCurrency = () => {
+    updateFavoriteCurrencies({name: name, flag: flag})
+    updateCurrency(name, isFavorite)
+  }
 
   return(
     <View style={getStyle(appTheme, 'card')}>
@@ -31,7 +36,10 @@ const FavoriteCard = ({ name, flag, appTheme }) => {
         <Text style={getStyle(appTheme, 'text')}>{name}</Text>
       </View>
       <View style={getStyle(appTheme, 'rightContainer')}>
-      <Button onPress={() => {}} color={appTheme.link} icon="star-outline" />
+      <Button
+        onPress={onSelectCurrency}
+        color={appTheme.link}
+        icon={isFavorite ? 'star' : 'star-outline'} />
       </View>
     </View>
   )

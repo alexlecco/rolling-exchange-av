@@ -1,5 +1,7 @@
 export const getCurrencySymbol = (currency) => {
   switch(currency) {
+    case 'usd':
+      return 'u$s'
     case 'ars':
       return '$'
     case 'eur':
@@ -11,18 +13,23 @@ export const getCurrencySymbol = (currency) => {
 
 export const getCurrencyName = (currency) => {
   switch(currency) {
+    case 'usd':
+      return 'dolares estadounidense'
     case 'ars':
       return 'pesos argentinos'
     case 'eur':
       return 'euros'
     case 'jpy':
-      return 'yenes'
+      return 'yenes japoneses'
   }
 }
 
 export const getExchange = (currency, amount) => {
   let exchange
   switch(currency) {
+    case 'usd':
+      exchange = amount * 1
+      return exchange.toFixed(2)
     case 'ars':
       exchange = amount * 70.87 * 1.3
       return exchange.toFixed(2)

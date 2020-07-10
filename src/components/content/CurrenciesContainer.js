@@ -3,7 +3,7 @@ import { View, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 import CurrencyCard from './CurrencyCard';
 
-const CurrenciesContainer = ({ changeScreen, appTheme, amount, favoriteCurrencies }) => {  
+const CurrenciesContainer = ({ changeScreen, appTheme, amount, allCurrencies }) => {  
   return(
   <>
     <View style={getStyle(appTheme, 'currenciesContainer')}>
@@ -11,12 +11,12 @@ const CurrenciesContainer = ({ changeScreen, appTheme, amount, favoriteCurrencie
         <Text style={getStyle(appTheme, 'buttonText')}>Agregar nueva moneda</Text>
       </Button>
       {
-        favoriteCurrencies.map(fav => (
+        allCurrencies.filter(currency => currency.isFavorite).map(currency => (
           <CurrencyCard
-            key={fav.name}
+            key={currency.name}
             appTheme={appTheme}
-            name={fav.name}
-            flag={fav.flag}
+            name={currency.name}
+            flag={currency.flag}
             amount={amount}
           />
         ))
