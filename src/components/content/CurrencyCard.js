@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, Image } from 'react-native'
 
 import flags from '../../constants/flags'
-import { getCurrencySymbol, getCurrencyName } from '../../utils/currencyFunctions'
+import { getCurrencySymbol, getCurrencyName, getExchange } from '../../utils/currencyFunctions'
 
 const CurrencyCard = ({ name, flag, appTheme, amount }) => {
   let url = ''
@@ -20,6 +20,7 @@ const CurrencyCard = ({ name, flag, appTheme, amount }) => {
       url = flags.usd
       break
   }
+  
 
   return(
     <View style={getStyle(appTheme, 'card')}>
@@ -34,7 +35,7 @@ const CurrencyCard = ({ name, flag, appTheme, amount }) => {
         {
           amount !== '' ?
             <>
-              <Text style={getStyle(appTheme, 'text')}>{getCurrencySymbol(flag)} {amount}</Text>
+              <Text style={getStyle(appTheme, 'text')}>{getCurrencySymbol(flag)} {getExchange(flag, amount)}</Text>
               <Text style={getStyle(appTheme, 'text')}>{getCurrencyName(flag)}</Text>
             </>
           :

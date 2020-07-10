@@ -14,7 +14,6 @@ const FavoritesSearchbar = ({ changeScreen, appTheme }) => {
       />
       <TextInput
         style={getStyle(appTheme, 'input')}
-        keyboardType='numeric'
         label="¿Que moneda estás buscando?"
         value={input}
         onChangeText={input => setInput(input)}
