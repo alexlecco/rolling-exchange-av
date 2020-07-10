@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
+import { Button } from 'react-native-paper'
 
 import flags from '../../constants/flags'
 
@@ -22,11 +23,16 @@ const FavoriteCard = ({ name, flag, appTheme }) => {
 
   return(
     <View style={getStyle(appTheme, 'card')}>
-      <Image
-        source={url}
-        style={{ width: 50, height: 50, marginRight: 10 }}
-      />
-      <Text style={getStyle(appTheme, 'text')}>{name}</Text>
+      <View style={getStyle(appTheme, 'leftContainer')}>
+        <Image
+          source={url}
+          style={{ width: 50, height: 50, marginRight: 10 }}
+        />
+        <Text style={getStyle(appTheme, 'text')}>{name}</Text>
+      </View>
+      <View style={getStyle(appTheme, 'rightContainer')}>
+      <Button onPress={() => {}} color={appTheme.link} icon="star-outline" />
+      </View>
     </View>
   )
 }
@@ -46,6 +52,20 @@ const getStyle = (theme, component) => {
     case 'text':
       return({
         color: theme.textPrimary,
+      })
+    case 'leftContainer': 
+      return({
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      })
+    case 'rightContainer': 
+      return({
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-end',
       })
   }
 }

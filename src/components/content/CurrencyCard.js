@@ -20,7 +20,6 @@ const CurrencyCard = ({ name, flag, appTheme, amount }) => {
       url = flags.usd
       break
   }
-  
 
   return(
     <View style={getStyle(appTheme, 'card')}>
