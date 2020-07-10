@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import { TextInput } from 'react-native-paper'
 
-const TopContainer = ({ appTheme }) => {
-  const [ input, setInput ] = useState('')
+const TopContainer = ({ appTheme, amount, setAmount }) => {
   const [ selectedCurrency ] = useState({name: 'USD', flag: 'usd'})
 
   return(
@@ -19,8 +18,8 @@ const TopContainer = ({ appTheme }) => {
         style={getStyle(appTheme, 'input')}
         keyboardType='numeric'
         label="¿Cuanto queres convertir?"
-        value={input}
-        onChangeText={input => setInput(input)}
+        value={amount}
+        onChangeText={amount => setAmount(amount)}
       />
     </View>
   )
