@@ -1,4 +1,5 @@
 export const darkTheme = {
+  name: 'darkTheme',
   primary: '#171921',
   secondary: '#F7F7F7',
   container: '#242D36',
@@ -6,7 +7,9 @@ export const darkTheme = {
   textSecondary: '#000000',
   link: '#F85D5D',
 }
+
 export const lightTheme = {
+  name: 'lightTheme',
   primary: '#ebebeb',
   secondary: '#171921',
   container: '#FFFFFF',

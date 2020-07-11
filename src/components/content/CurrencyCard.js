@@ -1,12 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
-
-// lightTheme or darkTheme
-import { darkTheme as theme } from '../../constants/colors'
+import { View, Text, Image } from 'react-native'
 
 import flags from '../../constants/flags'
 
-const CurrencyCard = ({ name, flag }) => {
+const CurrencyCard = ({ name, flag, appTheme }) => {
   let url = ''
   switch(flag) {
     case 'ars':
@@ -24,29 +21,33 @@ const CurrencyCard = ({ name, flag }) => {
   }
 
   return(
-    <View style={styles.card}>
+    <View style={getStyle(appTheme, 'card')}>
       <Image
         source={url}
         style={{ width: 50, height: 50, marginRight: 10 }}
       />
-      <Text style={styles.text}>{name}</Text>
+      <Text style={getStyle(appTheme, 'text')}>{name}</Text>
     </View>
   )
 }
 
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: theme.container,
-    width: '90%',
-    padding: 25,
-    margin: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  text: {
-    color: theme.textPrimary,
-  },
-})
+const getStyle = (theme, component) => {
+  switch(component) {
+    case 'card':
+      return({
+        backgroundColor: theme.container,
+        width: '90%',
+        padding: 25,
+        margin: 10,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+      })
+    case 'text':
+    return({
+      color: theme.textPrimary,
+    })
+  }
+}
 
 export default CurrencyCard
