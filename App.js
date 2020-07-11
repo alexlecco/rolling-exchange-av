@@ -13,6 +13,7 @@ import { darkTheme as defaultTheme } from './src/constants/colors'
 
 export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
+  const [ amount, setAmount ] = useState('')
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
   const updateTheme = () => {
     appTheme.name === 'darkTheme' ? setAppTheme(lightTheme) : setAppTheme(darkTheme)
@@ -27,8 +28,16 @@ export default function App() {
         mainVisible ?
         (
           <Fragment>
-            <TopContainer appTheme={appTheme}  />
-            <CurrenciesContainer appTheme={appTheme} changeScreen={setMainVisible} />
+            <TopContainer
+              appTheme={appTheme}
+              amount={amount}
+              setAmount={setAmount}
+            />
+            <CurrenciesContainer
+              appTheme={appTheme}
+              amount={amount}
+              changeScreen={setMainVisible}
+            />
             <BottomContainer appTheme={appTheme} updateTheme={updateTheme} />
           </Fragment>
         )

@@ -2,8 +2,9 @@ import React from 'react'
 import { View, Text, Image } from 'react-native'
 
 import flags from '../../constants/flags'
+import { getCurrencySymbol, getCurrencyName } from '../../utils/currencyFunctions'
 
-const CurrencyCard = ({ name, flag, appTheme }) => {
+const CurrencyCard = ({ name, flag, appTheme, amount }) => {
   let url = ''
   switch(flag) {
     case 'ars':
@@ -22,11 +23,24 @@ const CurrencyCard = ({ name, flag, appTheme }) => {
 
   return(
     <View style={getStyle(appTheme, 'card')}>
-      <Image
-        source={url}
-        style={{ width: 50, height: 50, marginRight: 10 }}
-      />
-      <Text style={getStyle(appTheme, 'text')}>{name}</Text>
+      <View style={getStyle(appTheme, 'leftContainer')}>
+        <Image
+          source={url}
+          style={{ width: 50, height: 50, marginRight: 10 }}
+        />
+        <Text style={getStyle(appTheme, 'text')}>{name}</Text>
+      </View>
+      <View style={getStyle(appTheme, 'rightContainer')}>
+        {
+          amount !== '' ?
+            <>
+              <Text style={getStyle(appTheme, 'text')}>{getCurrencySymbol(flag)} {amount}</Text>
+              <Text style={getStyle(appTheme, 'text')}>{getCurrencyName(flag)}</Text>
+            </>
+          :
+            null
+        }
+      </View>
     </View>
   )
 }
@@ -40,13 +54,25 @@ const getStyle = (theme, component) => {
         padding: 25,
         margin: 10,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
       })
     case 'text':
-    return({
-      color: theme.textPrimary,
-    })
+      return({
+        color: theme.textPrimary,
+      })
+    case 'leftContainer':
+      return({
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+      })
+    case 'rightContainer':
+      return({
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+      })
   }
 }
 
