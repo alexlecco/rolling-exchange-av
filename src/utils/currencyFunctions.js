@@ -20,6 +20,24 @@ export const getCurrencyName = (currency) => {
     case 'eur':
       return 'euros'
     case 'jpy':
-      return 'yenes'
+      return 'yenes japoneses'
   }
-} 
+}
+
+export const getExchange = (currency, amount) => {
+  let exchange
+  switch(currency) {
+    case 'ars':
+      exchange = amount * 70.87 * 1.30
+      return exchange.toFixed(2)
+    case 'usd':
+      exchange = amount * 1
+        return exchange.toFixed(2)
+    case 'eur':
+      exchange = amount * 0.89
+      return exchange.toFixed(2)
+    case 'jpy':
+      exchange = amount * 107.04
+      return exchange.toFixed(2)
+  }
+}
