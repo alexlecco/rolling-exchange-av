@@ -1,16 +1,23 @@
 import React from 'react'
 import { View } from 'react-native'
 import FavoriteCard from './FavoriteCard';
-import currencies from '../../constants/currencies'
 
-const FavoritesContainer = ({ appTheme }) => (
+const FavoritesContainer = ({
+  appTheme,
+  allCurrencies,
+  addFavoriteCurrency,
+  updateCurrency
+}) => (
   <View style={getStyle(appTheme, 'favoritesContainer')}>
-    {currencies.map(curr => 
+    {allCurrencies.map(curr => 
       <FavoriteCard
         key={curr.name}
         appTheme={appTheme}
         name={curr.name}
         flag={curr.flag}
+        isFavorite={curr.isFavorite}
+        updateCurrency={updateCurrency}
+        addFavoriteCurrency={addFavoriteCurrency}
       />
     )}
   </View>
