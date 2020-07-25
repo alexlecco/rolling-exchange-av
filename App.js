@@ -14,7 +14,7 @@ import { lightTheme as defaultTheme } from './src/constants/colors'
 
 export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
-  const [ fromCurrency ] = useState('eur')
+  const [ fromCurrency ] = useState('usd')
   const [ amount, setAmount ] = useState('')
   const [ favoriteCurrencies, setFavoriteCurrencies ] = useState([])
   const [ allCurrencies, setAllCurrencies ] =
