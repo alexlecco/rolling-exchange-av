@@ -24,20 +24,71 @@ export const getCurrencyName = (currency) => {
   }
 }
 
-export const getExchange = (currency, amount) => {
+export const getExchange = (fromCurrency, toCurrency, amount) => {
   let exchange
-  switch(currency) {
+
+  switch(fromCurrency) {
     case 'ars':
-      exchange = amount * 70.87 * 1.30
-      return exchange.toFixed(2)
+      switch(toCurrency) {
+        case 'ars':
+          exchange = amount * 1
+          return exchange.toFixed(2)
+        case 'usd':
+          exchange = amount * 0.014
+            return exchange.toFixed(2)
+        case 'eur':
+          exchange = amount * 0.012
+          return exchange.toFixed(2)
+        case 'jpy':
+          exchange = amount * 1.48
+          return exchange.toFixed(2)
+      }
     case 'usd':
-      exchange = amount * 1
-        return exchange.toFixed(2)
+      switch(toCurrency) {
+        case 'ars':
+          exchange = amount * 70.87 * 1.30
+          return exchange.toFixed(2)
+        case 'usd':
+          exchange = amount * 1
+            return exchange.toFixed(2)
+        case 'eur':
+          exchange = amount * 0.89
+          return exchange.toFixed(2)
+        case 'jpy':
+          exchange = amount * 107.04
+          return exchange.toFixed(2)
+      }
+    
     case 'eur':
-      exchange = amount * 0.89
-      return exchange.toFixed(2)
+      switch(toCurrency) {
+        case 'ars':
+          exchange = amount * 83.74
+          return exchange.toFixed(2)
+        case 'usd':
+          exchange = amount * 1.17
+            return exchange.toFixed(2)
+        case 'eur':
+          exchange = amount * 1
+          return exchange.toFixed(2)
+        case 'jpy':
+          exchange = amount * 123.70
+          return exchange.toFixed(2)
+      }
+    
     case 'jpy':
-      exchange = amount * 107.04
-      return exchange.toFixed(2)
+      switch(toCurrency) {
+        case 'ars':
+          exchange = amount * 0.68
+          return exchange.toFixed(2)
+        case 'usd':
+          exchange = amount * 0.0094
+            return exchange.toFixed(2)
+        case 'eur':
+          exchange = amount * 0.0081
+          return exchange.toFixed(2)
+        case 'jpy':
+          exchange = amount * 1
+          return exchange.toFixed(2)
+      }
   }
 }
