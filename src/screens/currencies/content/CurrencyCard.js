@@ -1,17 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, Text, Image } from 'react-native'
-import { Button } from 'react-native-paper'
 
-import flags from '../../constants/flags'
+import flags from '../../../constants/flags'
+import { getCurrencySymbol, getCurrencyName, getExchange } from '../../../utils/currencyFunctions'
 
-const FavoriteCard = ({
-  appTheme,
-  name,
-  flag,
-  isFavorite,
-  addFavoriteCurrency,
-  updateCurrency,
-}) => {
+const CurrencyCard = ({ name, flag, appTheme, amount }) => {
   let url = ''
   switch(flag) {
     case 'ars':
@@ -28,14 +21,8 @@ const FavoriteCard = ({
       break
   }
 
-  const onTouchStar = () => {
-    addFavoriteCurrency({name: name, flag: flag})
-    updateCurrency(name, isFavorite)
-  }
-
   return(
     <View style={getStyle(appTheme, 'card')}>
-
       <View style={getStyle(appTheme, 'leftContainer')}>
         <Image
           source={url}
@@ -44,11 +31,15 @@ const FavoriteCard = ({
         <Text style={getStyle(appTheme, 'text')}>{name}</Text>
       </View>
       <View style={getStyle(appTheme, 'rightContainer')}>
-        <Button
-          onPress={onTouchStar}
-          icon={isFavorite ? 'star' : 'star-outline'}
-          color={appTheme.link}
-        />
+        {
+          amount !== '' ?
+            <>
+              <Text style={getStyle(appTheme, 'text')}>{getCurrencySymbol(flag)} {getExchange(flag, amount)}</Text>
+              <Text style={getStyle(appTheme, 'text')}>{getCurrencyName(flag)}</Text>
+            </>
+          :
+            null
+        }
       </View>
     </View>
   )
@@ -63,7 +54,7 @@ const getStyle = (theme, component) => {
         padding: 25,
         margin: 10,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'space-between',
         alignItems: 'center',
       })
     case 'text':
@@ -85,4 +76,4 @@ const getStyle = (theme, component) => {
   }
 }
 
-export default FavoriteCard 
+export default CurrencyCard

@@ -1,10 +1,17 @@
 import React from 'react'
 import { View, Text, Image } from 'react-native'
+import { Button } from 'react-native-paper'
 
-import flags from '../../constants/flags'
-import { getCurrencySymbol, getCurrencyName, getExchange } from '../../utils/currencyFunctions'
+import flags from '../../../constants/flags'
 
-const CurrencyCard = ({ name, flag, appTheme, amount }) => {
+const FavoriteCard = ({
+  appTheme,
+  name,
+  flag,
+  isFavorite,
+  addFavoriteCurrency,
+  updateCurrency,
+}) => {
   let url = ''
   switch(flag) {
     case 'ars':
@@ -21,8 +28,14 @@ const CurrencyCard = ({ name, flag, appTheme, amount }) => {
       break
   }
 
+  const onTouchStar = () => {
+    addFavoriteCurrency({name: name, flag: flag})
+    updateCurrency(name, isFavorite)
+  }
+
   return(
     <View style={getStyle(appTheme, 'card')}>
+
       <View style={getStyle(appTheme, 'leftContainer')}>
         <Image
           source={url}
@@ -31,15 +44,11 @@ const CurrencyCard = ({ name, flag, appTheme, amount }) => {
         <Text style={getStyle(appTheme, 'text')}>{name}</Text>
       </View>
       <View style={getStyle(appTheme, 'rightContainer')}>
-        {
-          amount !== '' ?
-            <>
-              <Text style={getStyle(appTheme, 'text')}>{getCurrencySymbol(flag)} {getExchange(flag, amount)}</Text>
-              <Text style={getStyle(appTheme, 'text')}>{getCurrencyName(flag)}</Text>
-            </>
-          :
-            null
-        }
+        <Button
+          onPress={onTouchStar}
+          icon={isFavorite ? 'star' : 'star-outline'}
+          color={appTheme.link}
+        />
       </View>
     </View>
   )
@@ -54,7 +63,7 @@ const getStyle = (theme, component) => {
         padding: 25,
         margin: 10,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         alignItems: 'center',
       })
     case 'text':
@@ -76,4 +85,4 @@ const getStyle = (theme, component) => {
   }
 }
 
-export default CurrencyCard
+export default FavoriteCard 

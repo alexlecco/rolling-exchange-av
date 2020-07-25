@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
-const BottomContainer = ({ appTheme, updateTheme }) => (
+const CurrenciesTop = ({ appTheme, updateTheme }) => (
   <View style={getStyle(appTheme, 'bottomContainer')}>
     <Button color={appTheme.link} icon="update" style={getStyle(appTheme, 'button')} />
     <View>
@@ -40,4 +40,4 @@ const getStyle = (theme, component) => {
   }
 }
 
-export default BottomContainer
+export default CurrenciesTop

@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { View, Text, Image } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 
-const TopContainer = ({ appTheme, amount, setAmount }) => {
+const CurrenciesTop = ({ appTheme, amount, setAmount }) => {
   const [ selectedCurrency ] = useState({name: 'USD', flag: 'usd'})
 
   return(
     <View style={getStyle(appTheme, 'topContainer')}>
       <View style={getStyle(appTheme, 'selectedCurrency')}>
         <Image
-          source={require('../assets/flags/usd.png')}
+          source={require('../../assets/flags/usd.png')}
           style={{ width: 50, height: 50 }}
         />
         <Text style={getStyle(appTheme, 'selectedCurrencyName')}>{selectedCurrency.name}</Text>
@@ -65,4 +65,4 @@ const getStyle = (theme, component) => {
   }
 }
 
-export default TopContainer
+export default CurrenciesTop
