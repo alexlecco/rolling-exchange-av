@@ -11,6 +11,7 @@ import currencies from './src/constants/currencies'
 import { darkTheme } from './src/constants/colors'
 import { lightTheme } from './src/constants/colors'
 import { darkTheme as defaultTheme } from './src/constants/colors'
+const windowHeight = Dimensions.get('window').height;
 
 export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
@@ -36,6 +37,7 @@ export default function App() {
 
   return (
     <PaperProvider>
+    <View style={{ minHeight: windowHeight }}>
       {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
       {Platform.OS === 'android' && <View style={getStyle(appTheme, 'statusBarUnderlay')} />}
 
@@ -70,7 +72,7 @@ export default function App() {
           </Fragment>
         )
       }
-      
+    </View>
     </PaperProvider>
   );
 }
