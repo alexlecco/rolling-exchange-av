@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 
 const CurrenciesTop = ({ appTheme, fromCurrency, setFromCurrency, amount, setAmount }) => {
-  const [ showSelection, setShowSelection ] = useState(true)
+  const [ showSelection, setShowSelection ] = useState(false)
   const requireFlag = {
     ars: require('../../assets/flags/ars.png'),
     usd: require('../../assets/flags/usd.png'),

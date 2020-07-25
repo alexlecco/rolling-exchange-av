@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { View, StatusBar, Platform } from 'react-native';
+import { View, StatusBar, Platform, Dimensions } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper'
 import CurrenciesTop from './src/screens/currencies/CurrenciesTop'
 import CurrenciesContainer from './src/screens/currencies/content/CurrenciesContainer'
@@ -11,6 +11,8 @@ import currencies from './src/constants/currencies'
 import { darkTheme } from './src/constants/colors'
 import { lightTheme } from './src/constants/colors'
 import { darkTheme as defaultTheme } from './src/constants/colors'
+
+const windowHeigh = Dimensions.get('window').height
 
 export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
@@ -37,44 +39,45 @@ export default function App() {
 
   return (
     <PaperProvider>
-      {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-      {Platform.OS === 'android' && <View style={getStyle(appTheme, 'statusBarUnderlay')} />}
+      <View style={{ minHeight: windowHeigh }}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        {Platform.OS === 'android' && <View style={getStyle(appTheme, 'statusBarUnderlay')} />}
 
-      {
-        mainVisible ?
-        (
-          <Fragment>
-            <CurrenciesTop
-              appTheme={appTheme}
-              fromCurrency={fromCurrency}
-              setFromCurrency={setFromCurrency}
-              amount={amount}
-              setAmount={setAmount}
-            />
-            <CurrenciesContainer
-              appTheme={appTheme}
-              fromCurrency={fromCurrency}
-              amount={amount}
-              changeScreen={setMainVisible}
-              allCurrencies={allCurrencies}
-            />
-            <CurrenciesBottom appTheme={appTheme} updateTheme={updateTheme} />
-          </Fragment>
-        )
-        :
-        (
-          <Fragment>
-            <FavoritesTop appTheme={appTheme} changeScreen={setMainVisible} />
-            <FavoritesContainer
-              appTheme={appTheme}
-              allCurrencies={allCurrencies}
-              addFavoriteCurrency={addFavoriteCurrency}
-              updateCurrency={updateCurrency}
-            />
-          </Fragment>
-        )
-      }
-      
+        {
+          mainVisible ?
+          (
+            <Fragment>
+              <CurrenciesTop
+                appTheme={appTheme}
+                fromCurrency={fromCurrency}
+                setFromCurrency={setFromCurrency}
+                amount={amount}
+                setAmount={setAmount}
+              />
+              <CurrenciesContainer
+                appTheme={appTheme}
+                fromCurrency={fromCurrency}
+                amount={amount}
+                changeScreen={setMainVisible}
+                allCurrencies={allCurrencies}
+              />
+              <CurrenciesBottom appTheme={appTheme} updateTheme={updateTheme} />
+            </Fragment>
+          )
+          :
+          (
+            <Fragment>
+              <FavoritesTop appTheme={appTheme} changeScreen={setMainVisible} />
+              <FavoritesContainer
+                appTheme={appTheme}
+                allCurrencies={allCurrencies}
+                addFavoriteCurrency={addFavoriteCurrency}
+                updateCurrency={updateCurrency}
+              />
+            </Fragment>
+          )
+        }
+      </View>
     </PaperProvider>
   );
 }

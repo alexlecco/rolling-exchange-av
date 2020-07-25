@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import FavoriteCard from './FavoriteCard';
 
 const FavoritesContainer = ({
@@ -9,17 +9,19 @@ const FavoritesContainer = ({
   updateCurrency
 }) => (
   <View style={getStyle(appTheme, 'favoritesContainer')}>
-    {allCurrencies.map(curr => 
-      <FavoriteCard
-        key={curr.name}
-        appTheme={appTheme}
-        name={curr.name}
-        flag={curr.flag}
-        isFavorite={curr.isFavorite}
-        updateCurrency={updateCurrency}
-        addFavoriteCurrency={addFavoriteCurrency}
-      />
-    )}
+    <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', width: '100%' }}>
+      {allCurrencies.map(curr => 
+        <FavoriteCard
+          key={curr.name}
+          appTheme={appTheme}
+          name={curr.name}
+          flag={curr.flag}
+          isFavorite={curr.isFavorite}
+          updateCurrency={updateCurrency}
+          addFavoriteCurrency={addFavoriteCurrency}
+        />
+      )}
+    </ScrollView>
   </View>
 )
 
