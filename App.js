@@ -10,10 +10,11 @@ import currencies from './src/constants/currencies'
 
 import { darkTheme } from './src/constants/colors'
 import { lightTheme } from './src/constants/colors'
-import { lightTheme as defaultTheme } from './src/constants/colors'
+import { darkTheme as defaultTheme } from './src/constants/colors'
 
 export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
+  const [ fromCurrency ] = useState('usd')
   const [ amount, setAmount ] = useState('')
   const [ favoriteCurrencies, setFavoriteCurrencies ] = useState([])
   const [ allCurrencies, setAllCurrencies ] =
@@ -50,6 +51,7 @@ export default function App() {
             />
             <CurrenciesContainer
               appTheme={appTheme}
+              fromCurrency={fromCurrency}
               amount={amount}
               changeScreen={setMainVisible}
               allCurrencies={allCurrencies}
