@@ -5,6 +5,7 @@ import flags from '../../../constants/flags'
 import { getCurrencySymbol, getCurrencyName, getExchange } from '../../../utils/currencyFunctions'
 
 const CurrencyCard = ({ name, flag, appTheme, fromCurrency, amount }) => {
+  const styles = getStyle(appTheme)
   let url = ''
   switch(flag) {
     case 'ars':
@@ -22,20 +23,20 @@ const CurrencyCard = ({ name, flag, appTheme, fromCurrency, amount }) => {
   }
 
   return(
-    <View style={getStyle(appTheme, 'card')}>
-      <View style={getStyle(appTheme, 'leftContainer')}>
+    <View style={styles.card}>
+      <View style={styles.leftContainer}>
         <Image
           source={url}
           style={{ width: 50, height: 50, marginRight: 10 }}
         />
-        <Text style={getStyle(appTheme, 'text')}>{name}</Text>
+        <Text style={styles.text}>{name}</Text>
       </View>
-      <View style={getStyle(appTheme, 'rightContainer')}>
+      <View style={styles.rightContainer}>
         {
           amount !== '' ?
             <>
-              <Text style={getStyle(appTheme, 'text')}>{getCurrencySymbol(flag)} {getExchange(fromCurrency, flag, amount)}</Text>
-              <Text style={getStyle(appTheme, 'text')}>{getCurrencyName(flag)}</Text>
+              <Text style={styles.text}>{getCurrencySymbol(flag)} {getExchange(fromCurrency, flag, amount)}</Text>
+              <Text style={styles.text}>{getCurrencyName(flag)}</Text>
             </>
           :
             null
@@ -45,35 +46,29 @@ const CurrencyCard = ({ name, flag, appTheme, fromCurrency, amount }) => {
   )
 }
 
-const getStyle = (theme, component) => {
-  switch(component) {
-    case 'card':
-      return({
-        backgroundColor: theme.container,
-        width: '90%',
-        padding: 25,
-        margin: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      })
-    case 'text':
-      return({
-        color: theme.textPrimary,
-      })
-    case 'leftContainer':
-      return({
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-      })
-    case 'rightContainer':
-      return({
-        flex: 1,
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-      })
+const getStyle = theme => ({
+  card: {
+    backgroundColor: theme.container,
+    width: '90%',
+    padding: 25,
+    margin: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  text: {
+    color: theme.textPrimary,
+  },
+  leftContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  rightContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
   }
-}
+})
 
 export default CurrencyCard

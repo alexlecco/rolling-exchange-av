@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { View, StatusBar, Platform, Dimensions } from 'react-native';
+import { StyleSheet, View, StatusBar, Platform, Dimensions } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper'
 import CurrenciesTop from './src/screens/currencies/CurrenciesTop'
 import CurrenciesContainer from './src/screens/currencies/content/CurrenciesContainer'
@@ -25,6 +25,7 @@ export default function App() {
   const updateTheme = () => {
     appTheme.name === 'darkTheme' ? setAppTheme(lightTheme) : setAppTheme(darkTheme)
   }
+  const styles = getStyle(appTheme)
 
   const addFavoriteCurrency = newCurrency => {
     setFavoriteCurrencies( prevState => [...prevState, newCurrency] )
@@ -41,7 +42,7 @@ export default function App() {
     <PaperProvider>
       <View style={{ minHeight: windowHeigh }}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        {Platform.OS === 'android' && <View style={getStyle(appTheme, 'statusBarUnderlay')} />}
+        {Platform.OS === 'android' && <View style={styles.statusBarUnderlay} />}
 
         {
           mainVisible ?
@@ -82,12 +83,11 @@ export default function App() {
   );
 }
 
-const getStyle = (theme, component) => {
-  switch(component) {
-    case 'statusBarUnderlay':
-      return({
-        height: 28,
-        backgroundColor: theme.secondary,
-      })
-  }
-}
+const getStyle = theme => (
+  StyleSheet.create({
+    statusBarUnderlay: {
+      height: 28,
+      backgroundColor: theme.secondary,
+    }
+  })
+)
