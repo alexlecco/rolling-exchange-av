@@ -12,7 +12,7 @@ import { darkTheme } from './src/constants/colors'
 import { lightTheme } from './src/constants/colors'
 import { darkTheme as defaultTheme } from './src/constants/colors'
 
-const windowHeigh = Dimensions.get('window').height
+const windowHeigh = Dimensions.get('screen').height
 
 export default function App() {
   const [ mainVisible, setMainVisible ] = useState(true)
