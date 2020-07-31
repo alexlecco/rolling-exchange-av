@@ -15,7 +15,7 @@ const CurrenciesTop = ({ appTheme, updateRates, updateTheme, lastInfo }) => {
       />
       <View style={{ alignItems: 'center' }}>
         <Text style={styles.updateText}>Ultima actualización</Text>
-        <Text style={styles.updateText}>{lastInfo.date}</Text>
+        <Text style={styles.updateText}>{lastInfo.date}   -   {lastInfo.hour}</Text>
       </View>
       <Button
         color={appTheme.link}

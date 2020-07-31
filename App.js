@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react';
+import moment from 'moment'
 import { StyleSheet, View, StatusBar, Platform, Dimensions } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper'
 import CurrenciesTop from './src/screens/currencies/CurrenciesTop'
@@ -33,7 +34,7 @@ export default function App() {
     })
     .then(response => response.json())
     .then(responseJson => {
-      setLastInfo(responseJson)
+      setLastInfo({...responseJson, hour: moment().format('h:mm:ss')})
     })
     .catch((error) => {
       console.error("error:", error);
@@ -50,6 +51,8 @@ export default function App() {
     temp_allCurrencies[objIndex].isFavorite = !isFavorite
     setAllCurrencies(temp_allCurrencies)
   }
+
+  console.log("lastInfo::::", lastInfo)
 
   return (
     <PaperProvider>
