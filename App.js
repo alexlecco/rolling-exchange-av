@@ -52,8 +52,6 @@ export default function App() {
     setAllCurrencies(temp_allCurrencies)
   }
 
-  console.log("lastInfo::::", lastInfo)
-
   return (
     <PaperProvider>
       <View style={{ minHeight: windowHeigh }}>
@@ -77,6 +75,7 @@ export default function App() {
                 amount={amount}
                 changeScreen={setMainVisible}
                 allCurrencies={allCurrencies}
+                lastInfo={lastInfo}
               />
               <CurrenciesBottom
                 appTheme={appTheme}
