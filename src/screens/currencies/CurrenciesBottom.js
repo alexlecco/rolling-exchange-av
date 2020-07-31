@@ -2,15 +2,20 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
-const CurrenciesTop = ({ appTheme, updateTheme }) => {
+const CurrenciesTop = ({ appTheme, updateRates, updateTheme, lastInfo }) => {
   const styles = getStyle(appTheme)
 
   return(
     <View style={styles.bottomContainer}>
-      <Button color={appTheme.link} icon="update" style={styles.button} />
-      <View>
+      <Button
+        color={appTheme.link}
+        icon="update"
+        style={styles.button}
+        onPress={updateRates}
+      />
+      <View style={{ alignItems: 'center' }}>
         <Text style={styles.updateText}>Ultima actualización</Text>
-        <Text style={styles.updateText}>4 de Julio de 2020</Text>
+        <Text style={styles.updateText}>{lastInfo.date}</Text>
       </View>
       <Button
         color={appTheme.link}
