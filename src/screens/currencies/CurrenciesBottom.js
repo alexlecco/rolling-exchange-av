@@ -1,4 +1,6 @@
 import React from 'react'
+import moment from 'moment'
+import 'moment/locale/es'
 import { View, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
@@ -15,7 +17,7 @@ const CurrenciesBottom = ({ appTheme, updateTheme, updateRates, lastRates }) => 
       />
       <View>
         <Text style={styles.updateText}>Ultima actualización</Text>
-        <Text style={styles.updateText}>{lastRates.date}</Text>
+        <Text style={styles.updateText}>{moment(lastRates.date).locale('es').format('LL')}   -   {lastRates.hour}</Text>
       </View>
       <Button
         color={appTheme.link}

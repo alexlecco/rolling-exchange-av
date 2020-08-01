@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
-import { StyleSheet, View, StatusBar, Platform, Dimensions } from 'react-native';
+import moment from 'moment'
+import { StyleSheet, View, StatusBar, Platform, Dimensions } from 'react-native'
 import { Provider as PaperProvider } from 'react-native-paper'
 import CurrenciesTop from './src/screens/currencies/CurrenciesTop'
 import CurrenciesContainer from './src/screens/currencies/content/CurrenciesContainer'
@@ -31,7 +32,7 @@ export default function App() {
     fetch(`https://api.exchangerate.host/latest?base=${fromCurrency}`)
     .then(res => res.json())
     .then(responseJson => {
-      setLastRates(responseJson)
+      setLastRates({...responseJson, hour: moment().format('H:mm:ss')})
     })
     .catch(e => {
       console.log('error: ', e)
@@ -48,8 +49,6 @@ export default function App() {
     temp_allCurrencies[objIndex].isFavorite = !isFavorite
     setAllCurrencies(temp_allCurrencies)
   }
-
-  console.log("ultima consulta::::::", lastRates)
 
   return (
     <PaperProvider>
