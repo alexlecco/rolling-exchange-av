@@ -66,6 +66,7 @@ export default function App() {
                 setFromCurrency={setFromCurrency}
                 amount={amount}
                 setAmount={setAmount}
+                updateRates={updateRates}
               />
               <CurrenciesContainer
                 appTheme={appTheme}
@@ -73,6 +74,7 @@ export default function App() {
                 amount={amount}
                 changeScreen={setMainVisible}
                 allCurrencies={allCurrencies}
+                lastRates={lastRates}
               />
               <CurrenciesBottom
                 appTheme={appTheme}

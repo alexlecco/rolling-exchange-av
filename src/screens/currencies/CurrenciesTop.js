@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 
-const CurrenciesTop = ({ appTheme, fromCurrency, setFromCurrency, amount, setAmount }) => {
+const CurrenciesTop = ({ appTheme, fromCurrency, setFromCurrency, amount, setAmount, updateRates }) => {
   const styles = getStyle(appTheme)
   const [ showSelection, setShowSelection ] = useState(false)
   const requireFlag = {
@@ -17,6 +17,7 @@ const CurrenciesTop = ({ appTheme, fromCurrency, setFromCurrency, amount, setAmo
   const onHandleSelectCurrency = currency => {
     setFromCurrency(currency)
     setShowSelection(!showSelection)
+    updateRates()
   }
 
   return(
