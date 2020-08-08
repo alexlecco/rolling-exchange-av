@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { StyleSheet, View, Text, Image } from 'react-native'
 import { Button } from 'react-native-paper'
 
 import flags from '../../../constants/flags'
@@ -56,29 +56,31 @@ const FavoriteCard = ({
   )
 }
 
-const getStyle = theme => ({
-  card: {
-    backgroundColor: theme.container,
-    width: '90%',
-    padding: 25,
-    margin: 10,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  text: {
-    color: theme.textPrimary,
-  },
-  leftContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  rightContainer: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-  }
-})
+const getStyle = theme => (
+  StyleSheet.create({
+    card: {
+      backgroundColor: theme.container,
+      width: '90%',
+      padding: 25,
+      margin: 10,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+    },
+    text: {
+      color: theme.textPrimary,
+    },
+    leftContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    rightContainer: {
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+    }
+  })
+)
 
 export default FavoriteCard 

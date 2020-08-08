@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import 'moment/locale/es'
-import { View, Text } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
 const CurrenciesBottom = ({ appTheme, updateTheme, updateRates, lastRates }) => {
@@ -29,22 +29,24 @@ const CurrenciesBottom = ({ appTheme, updateTheme, updateRates, lastRates }) => 
   )
 }
 
-const getStyle = theme => ({
-  bottomContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: theme.primary,
-  },
-  updateText: {
-    color: theme.textPrimary,
-    textAlign: 'center',
-  },
-  button: {
-    paddingLeft: 15,
-  }
-})
+const getStyle = theme => (
+  StyleSheet.create({
+    bottomContainer: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      flexDirection: 'row',
+      width: '100%',
+      backgroundColor: theme.primary,
+    },
+    updateText: {
+      color: theme.textPrimary,
+      textAlign: 'center',
+    },
+    button: {
+      paddingLeft: 15,
+    }
+  })
+) 
 
 export default CurrenciesBottom

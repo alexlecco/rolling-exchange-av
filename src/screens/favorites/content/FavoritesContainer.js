@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import FavoriteCard from './FavoriteCard';
 
 const FavoritesContainer = ({
@@ -29,14 +29,16 @@ const FavoritesContainer = ({
   )
 }
 
-const getStyle = theme => ({
-  favoritesContainer: {
-    flex: 8,
-    backgroundColor: theme.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%'
-  }
-})
+const getStyle = theme => (
+  StyleSheet.create({
+    favoritesContainer: {
+      flex: 8,
+      backgroundColor: theme.primary,
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%'
+    }
+  })
+)
 
 export default FavoritesContainer

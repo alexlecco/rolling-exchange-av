@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 
 const CurrenciesTop = ({ appTheme, fromCurrency, setFromCurrency, amount, setAmount, updateRates }) => {
@@ -95,64 +95,66 @@ const CurrenciesTop = ({ appTheme, fromCurrency, setFromCurrency, amount, setAmo
   )
 }
 
-const getStyle = theme => ({
-  topContainer: {
-    flex: 1.6,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: theme.secondary,
-  },
-  input: {
-    width: '60%',
-    paddingBottom: 10,
-    height: 60
-  },
-  fromCurrency: {
-    width: '20%',
-    paddingBottom: 10,
-    height: 60,
-    marginRight: 1,
-    alignItems: 'center',
-  },
-  fromCurrencyName: {
-    color: theme.link,
-    textAlign: 'center',
-    marginTop: 5,
-  },
-  selection: {
-    width: '100%',
-    backgroundColor: theme.secondary,
-  },
-  selectionText: {
-    color: theme.textSecondary,
-    textAlign: 'center',
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  selectionCurrencies: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    width: '25%',
-    width: '100%',
-    paddingBottom: 10,
-  },
-  selectionCurrencyButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    width: '25%',
-    paddingTop: 10,
-  },
-  fromCurrencyButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column',
-    width: '100%',
-    height: 60,
-  }
-})
+const getStyle = theme => (
+  StyleSheet.create({
+    topContainer: {
+      flex: 1.6,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      width: '100%',
+      backgroundColor: theme.secondary,
+    },
+    input: {
+      width: '60%',
+      paddingBottom: 10,
+      height: 60
+    },
+    fromCurrency: {
+      width: '20%',
+      paddingBottom: 10,
+      height: 60,
+      marginRight: 1,
+      alignItems: 'center',
+    },
+    fromCurrencyName: {
+      color: theme.link,
+      textAlign: 'center',
+      marginTop: 5,
+    },
+    selection: {
+      width: '100%',
+      backgroundColor: theme.secondary,
+    },
+    selectionText: {
+      color: theme.textSecondary,
+      textAlign: 'center',
+      marginTop: 5,
+      marginBottom: 5,
+    },
+    selectionCurrencies: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      width: '25%',
+      width: '100%',
+      paddingBottom: 10,
+    },
+    selectionCurrencyButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      width: '25%',
+      paddingTop: 10,
+    },
+    fromCurrencyButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'column',
+      width: '100%',
+      height: 60,
+    }
+  })
+)
 
 export default CurrenciesTop

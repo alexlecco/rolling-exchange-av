@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 
 const FavoritesTop = ({ appTheme, changeScreen }) => {
@@ -23,20 +23,22 @@ const FavoritesTop = ({ appTheme, changeScreen }) => {
   )
 }
 
-const getStyle = theme => ({
-  favoritesSearchbar: {
-    flex: 1.6,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    width: '100%',
-    backgroundColor: theme.secondary,
-  },
-  input: {
-    width: '60%',
-    paddingBottom: 10,
-    height: 60
-  }
-})
+const getStyle = theme => (
+  StyleSheet.create({
+    favoritesSearchbar: {
+      flex: 1.6,
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row',
+      width: '100%',
+      backgroundColor: theme.secondary,
+    },
+    input: {
+      width: '60%',
+      paddingBottom: 10,
+      height: 60
+    }
+  })
+)
 
 export default FavoritesTop

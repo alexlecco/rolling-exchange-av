@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ScrollView } from 'react-native'
+import { StyleSheet, View, Text, ScrollView } from 'react-native'
 import { Button } from 'react-native-paper'
 import CurrencyCard from './CurrencyCard';
 
@@ -31,18 +31,20 @@ const CurrenciesContainer = ({ appTheme, changeScreen, fromCurrency, amount, all
 }
 
 
-const getStyle = theme => ({
-  currenciesContainer: {
-    flex: 8,
-    backgroundColor: theme.primary,
-    width: '100%',
-  },
-  button: {
-    backgroundColor: theme.primary,
-  },
-  buttonText: {
-    color: theme.link,
-  }
-})
+const getStyle = theme => (
+  StyleSheet.create({
+    currenciesContainer: {
+      flex: 8,
+      backgroundColor: theme.primary,
+      width: '100%',
+    },
+    button: {
+      backgroundColor: theme.primary,
+    },
+    buttonText: {
+      color: theme.link,
+    }
+  })
+)
 
 export default CurrenciesContainer
