@@ -32,7 +32,7 @@ export default function App() {
     fetch(`https://api.exchangerate.host/latest?base=${fromCurrency}`)
     .then(res => res.json())
     .then(responseJson => {
-      setLastRates({...responseJson, hour: moment().format('H:mm:ss')})
+      setLastRates({...responseJson, hour: moment().format('H:mm')})
     })
     .catch(e => {
       console.log('error: ', e)
