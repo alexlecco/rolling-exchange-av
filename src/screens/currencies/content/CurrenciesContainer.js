@@ -20,6 +20,7 @@ const CurrenciesContainer = ({ appTheme, changeScreen, fromCurrency, amount, all
               fromCurrency={fromCurrency}
               amount={amount}
               name={fav.name}
+              nickname={fav.nickname}
               flag={fav.flag}
               lastRates={lastRates}
             />

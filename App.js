@@ -34,6 +34,7 @@ export default function App() {
   const [ favoriteCurrencies, setFavoriteCurrencies ] = useState([])
   const [ allCurrencies, setAllCurrencies ] = useState(defaultCurrencies)
   const [ deviceCurrencies, setDeviceCurrencies ] = useState([])
+  const [ filteredCurrencies, setFilteredCurrencies ] = useState([])
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
 
   const getDeviceCurrencies = async () => {
@@ -45,6 +46,33 @@ export default function App() {
     getTheme().then(setAppTheme).catch(setAppTheme(darkTheme));
     getDeviceCurrencies().then(setDeviceCurrencies).catch(setDeviceCurrencies(defaultCurrencies))
   }, []);
+
+  const searchCurrency = term => {
+    let currentCurrencies = []
+    let resultCurrencies = []
+
+    if(term !== '' && term.length > 2) {
+      currentCurrencies = allCurrencies
+      resultCurrencies = currentCurrencies.filter(
+        currency => {
+          const formattedCurrency = currency.nickname.toLowerCase()
+          const formattedFilter = term.toLowerCase()
+          return formattedCurrency.includes(formattedFilter)
+        }
+      )
+    } else {
+      resultCurrencies = allCurrencies
+    }
+
+    updateList(resultCurrencies, term)
+  }
+
+  const updateList = (newList, term) => {
+    term !== '' ?
+      setFilteredCurrencies(newList)
+    :
+      setFilteredCurrencies(allCurrencies)
+  }
 
   const updateTheme = async () => {
     try {
@@ -123,10 +151,14 @@ export default function App() {
           :
           (
             <Fragment>
-              <FavoritesTop appTheme={appTheme} changeScreen={setMainVisible} />
+              <FavoritesTop
+                appTheme={appTheme}
+                changeScreen={setMainVisible}
+                searchCurrency={searchCurrency}
+              />
               <FavoritesContainer
                 appTheme={appTheme}
-                allCurrencies={deviceCurrencies}
+                allCurrencies={filteredCurrencies}
                 addFavoriteCurrency={addFavoriteCurrency}
                 updateCurrency={updateCurrency}
               />
