@@ -1,6 +1,7 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import moment from 'moment'
 import { StyleSheet, View, StatusBar, Platform, Dimensions } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 import { Provider as PaperProvider } from 'react-native-paper'
 import CurrenciesTop from './src/screens/currencies/CurrenciesTop'
 import CurrenciesContainer from './src/screens/currencies/content/CurrenciesContainer'
@@ -11,11 +12,18 @@ import { currencies, initialRates } from './src/constants/currencies'
 
 import { darkTheme } from './src/constants/colors'
 import { lightTheme } from './src/constants/colors'
-import { darkTheme as defaultTheme } from './src/constants/colors'
 
 const windowHeigh = Dimensions.get('screen').height
 
+const THEME = "@theme"
+
 export default function App() {
+  const defaultTheme = darkTheme
+  const getTheme = async () => {
+    const theme = await AsyncStorage.getItem(THEME)
+    return theme !== null ? JSON.parse(theme) : defaultTheme
+  }
+
   const [ lastRates, setLastRates ] = useState(initialRates)
   const [ mainVisible, setMainVisible ] = useState(true)
   const [ fromCurrency, setFromCurrency ] = useState('usd')
@@ -24,9 +32,27 @@ export default function App() {
   const [ allCurrencies, setAllCurrencies ] =
     useState(currencies.map(curr => ({ ...curr, isFavorite: false })))
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
-  const updateTheme = () => {
-    appTheme.name === 'darkTheme' ? setAppTheme(lightTheme) : setAppTheme(darkTheme)
+
+  useEffect(() => {
+    getTheme().then(setAppTheme).catch(setAppTheme(defaultTheme))
+  }, [])
+
+  const updateTheme = async () => {
+    try {
+      if(appTheme.name === 'darkTheme') {
+        setAppTheme(lightTheme)
+        const theme = JSON.stringify(lightTheme)
+        await AsyncStorage.setItem(THEME, theme)
+      } else {
+        setAppTheme(darkTheme)
+        const theme = JSON.stringify(darkTheme)
+        await AsyncStorage.setItem(THEME, theme)
+      }
+    } catch(e) {
+      console.log(e)
+    }
   }
+
   const styles = getStyle(appTheme)
   const updateRates = () => {
     fetch(`https://api.exchangerate.host/latest?base=${fromCurrency}`)
@@ -81,7 +107,7 @@ export default function App() {
                 updateTheme={updateTheme}
                 updateRates={updateRates}
                 lastRates={lastRates}
-                />
+              />
             </Fragment>
           )
           :
