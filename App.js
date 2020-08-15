@@ -15,13 +15,20 @@ import { lightTheme } from './src/constants/colors'
 
 const windowHeigh = Dimensions.get('screen').height
 
-const THEME = "@theme"
+const THEME = '@theme'
+const FAV_CURRENCIES = '@favCurrencies'
 
 export default function App() {
   const defaultTheme = darkTheme
+  const defaultCurrencies = currencies.map(curr => ({ ...curr, isFavorite: false }))
+  
   const getTheme = async () => {
     const theme = await AsyncStorage.getItem(THEME)
     return theme !== null ? JSON.parse(theme) : defaultTheme
+  }
+  const getDeviceCurrencies = async () => {
+    const currencies = await AsyncStorage.getItem(FAV_CURRENCIES)
+    return currencies !== null ? JSON.parse(currencies) : defaultCurrencies
   }
 
   const [ lastRates, setLastRates ] = useState(initialRates)
@@ -29,12 +36,13 @@ export default function App() {
   const [ fromCurrency, setFromCurrency ] = useState('usd')
   const [ amount, setAmount ] = useState('')
   const [ favoriteCurrencies, setFavoriteCurrencies ] = useState([])
-  const [ allCurrencies, setAllCurrencies ] =
-    useState(currencies.map(curr => ({ ...curr, isFavorite: false })))
+  const [ allCurrencies, setAllCurrencies ] = useState(defaultCurrencies)
+  const [ deviceCurrencies, setDeviceCurrencies ] = useState([])
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
 
   useEffect(() => {
     getTheme().then(setAppTheme).catch(setAppTheme(defaultTheme))
+    getDeviceCurrencies().then(setDeviceCurrencies).catch(setDeviceCurrencies(defaultCurrencies))
   }, [])
 
   const updateTheme = async () => {
@@ -69,11 +77,12 @@ export default function App() {
     setFavoriteCurrencies( prevState => [...prevState, newCurrency] )
   }
 
-  const updateCurrency = ( name, isFavorite ) => {
-    let temp_allCurrencies = allCurrencies
+  const updateCurrency = async ( name, isFavorite ) => {
+    let temp_allCurrencies = deviceCurrencies
     const objIndex = allCurrencies.findIndex((obj => obj.name === name))
     temp_allCurrencies[objIndex].isFavorite = !isFavorite
     setAllCurrencies(temp_allCurrencies)
+    AsyncStorage.setItem(FAV_CURRENCIES, JSON.stringify(temp_allCurrencies))
   }
 
   return (
@@ -99,7 +108,7 @@ export default function App() {
                 fromCurrency={fromCurrency}
                 amount={amount}
                 changeScreen={setMainVisible}
-                allCurrencies={allCurrencies}
+                allCurrencies={deviceCurrencies}
                 lastRates={lastRates}
               />
               <CurrenciesBottom
@@ -116,7 +125,7 @@ export default function App() {
               <FavoritesTop appTheme={appTheme} changeScreen={setMainVisible} />
               <FavoritesContainer
                 appTheme={appTheme}
-                allCurrencies={allCurrencies}
+                allCurrencies={deviceCurrencies}
                 addFavoriteCurrency={addFavoriteCurrency}
                 updateCurrency={updateCurrency}
               />
