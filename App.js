@@ -38,12 +38,48 @@ export default function App() {
   const [ favoriteCurrencies, setFavoriteCurrencies ] = useState([])
   const [ allCurrencies, setAllCurrencies ] = useState(defaultCurrencies)
   const [ deviceCurrencies, setDeviceCurrencies ] = useState([])
+  const [ filteredCurrencies, setFilteredCurrencies ] = useState([])
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
 
   useEffect(() => {
     getTheme().then(setAppTheme).catch(setAppTheme(defaultTheme))
     getDeviceCurrencies().then(setDeviceCurrencies).catch(setDeviceCurrencies(defaultCurrencies))
   }, [])
+
+  const clearAppData = async () => {
+    try {
+      const keys = await AsyncStorage.getAllKeys()
+      await AsyncStorage.multiRemove(keys)
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const searchCurrency = term => {
+    let currentCurrencies = deviceCurrencies
+    let resultCurrencies = []
+
+    if(term !== '' && term.length > 2) {
+      resultCurrencies = currentCurrencies.filter(
+        currency => {
+          const formattedCurrency = currency.nickname.toLowerCase()
+          const formattedTerm = term.toLowerCase()
+          return formattedCurrency.includes(formattedTerm)
+        }
+      )
+    } else {
+      resultCurrencies = deviceCurrencies
+    }
+
+    updateList(resultCurrencies, term)
+  }
+
+  const updateList = (newList, term) => {
+    term !== '' ?
+      setFilteredCurrencies(newList)
+    :
+      setFilteredCurrencies(deviceCurrencies)
+  }
 
   const updateTheme = async () => {
     try {
@@ -116,16 +152,21 @@ export default function App() {
                 updateTheme={updateTheme}
                 updateRates={updateRates}
                 lastRates={lastRates}
+                clearAppData={clearAppData}
               />
             </Fragment>
           )
           :
           (
             <Fragment>
-              <FavoritesTop appTheme={appTheme} changeScreen={setMainVisible} />
+              <FavoritesTop
+                appTheme={appTheme}
+                changeScreen={setMainVisible}
+                searchCurrency={searchCurrency}
+              />
               <FavoritesContainer
                 appTheme={appTheme}
-                allCurrencies={deviceCurrencies}
+                allCurrencies={filteredCurrencies}
                 addFavoriteCurrency={addFavoriteCurrency}
                 updateCurrency={updateCurrency}
               />

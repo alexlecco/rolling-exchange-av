@@ -35,6 +35,9 @@ const FavoriteCard = ({
     updateCurrency(name, isFavorite)
   }
 
+  console.log("name:::", name)
+  console.log("isFavorite:::", isFavorite)
+
   return(
     <View style={styles.card}>
 
@@ -83,4 +86,4 @@ const getStyle = theme => (
   })
 )
 
-export default FavoriteCard 
+export default FavoriteCard

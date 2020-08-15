@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
 
-const FavoritesTop = ({ appTheme, changeScreen }) => {
+const FavoritesTop = ({ appTheme, changeScreen, searchCurrency }) => {
   const styles = getStyle(appTheme)
   const [ input, setInput ] = useState('')
+
+  useEffect(
+    () => searchCurrency(input)
+    , [input]
+  )
 
   return(
     <View style={styles.favoritesSearchbar}>

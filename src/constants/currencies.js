@@ -2,18 +2,22 @@ const currencies = [
   {
     name: 'ARS',
     flag: 'ars',
+    nickname: 'pesos argentinos',
   },
   {
     name: 'USD',
     flag: 'usd',
+    nickname: 'dolares americanos',
   },
   {
     name: 'EUR',
     flag: 'eur',
+    nickname: 'euros',
   },
   {
     name: 'JPY',
     flag: 'jpy',
+    nickname: 'yenes japonés',
   },
 ]
 
