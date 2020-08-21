@@ -4,7 +4,7 @@ import 'moment/locale/es'
 import { StyleSheet, View, Text } from 'react-native'
 import { Button } from 'react-native-paper'
 
-const CurrenciesBottom = ({ appTheme, updateTheme, updateRates, lastRates, clearAppData }) => {
+const CurrenciesBottom = ({ appTheme, updateTheme, updateRates, lastRates }) => {
   const styles = getStyle(appTheme)
 
   return(
@@ -14,12 +14,6 @@ const CurrenciesBottom = ({ appTheme, updateTheme, updateRates, lastRates, clear
         icon="update"
         style={styles.button}
         onPress={updateRates}
-      />
-      <Button
-        color={appTheme.link}
-        icon="delete"
-        style={styles.button}
-        onPress={clearAppData}
       />
       <View>
         <Text style={styles.updateText}>Ultima actualización</Text>

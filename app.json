@@ -7,7 +7,11 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "android": {
+      "package": "com.alexlecco.rollingexchange",
+      "versionCode": 2
+    },
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
