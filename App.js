@@ -3,6 +3,7 @@ import moment from 'moment'
 import { StyleSheet, View, StatusBar, Platform, Dimensions } from 'react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Provider as PaperProvider } from 'react-native-paper'
+import { currencyService } from './src/services/currencyService'
 import CurrenciesTop from './src/screens/currencies/CurrenciesTop'
 import CurrenciesContainer from './src/screens/currencies/content/CurrenciesContainer'
 import CurrenciesBottom from './src/screens/currencies/CurrenciesBottom'
@@ -40,10 +41,18 @@ export default function App() {
   const [ deviceCurrencies, setDeviceCurrencies ] = useState([])
   const [ filteredCurrencies, setFilteredCurrencies ] = useState([])
   const [ appTheme, setAppTheme ] = useState(defaultTheme)
+  const [ isLoading, setIsLoading ] = useState(false)
+  const [ isFromCache, setIsFromCache ] = useState(false)
+  const [ lastUpdateTime, setLastUpdateTime ] = useState(null)
+  const [ cacheAge, setCacheAge ] = useState(null)
+  const [ updateError, setUpdateError ] = useState(null)
 
   useEffect(() => {
     getTheme().then(setAppTheme).catch(setAppTheme(defaultTheme))
     getDeviceCurrencies().then(setDeviceCurrencies).catch(setDeviceCurrencies(defaultCurrencies))
+    
+    // Cargar tasas iniciales
+    updateRates()
   }, [])
 
   const clearAppData = async () => {
@@ -98,15 +107,42 @@ export default function App() {
   }
 
   const styles = getStyle(appTheme)
-  const updateRates = () => {
-    fetch(`https://api.exchangerate.host/latest?base=${fromCurrency}`)
-    .then(res => res.json())
-    .then(responseJson => {
-      setLastRates({...responseJson, hour: moment().format('H:mm')})
-    })
-    .catch(e => {
-      console.log('error: ', e)
-    })
+  const updateRates = async (forceRefresh = false) => {
+    setIsLoading(true)
+    setUpdateError(null)
+    
+    try {
+      let ratesData;
+      
+      if (forceRefresh) {
+        // Forzar actualización desde API
+        ratesData = await currencyService.forceUpdate(fromCurrency.toUpperCase());
+      } else {
+        // Usar cache si está disponible y actualizado
+        ratesData = await currencyService.getRates(fromCurrency.toUpperCase());
+      }
+      
+      // Actualizar estados
+      setLastRates({
+        ...ratesData,
+        hour: moment(ratesData.timestamp).format('H:mm'),
+        date: moment(ratesData.timestamp).format('YYYY-MM-DD')
+      });
+      
+      setIsFromCache(ratesData.fromCache);
+      setLastUpdateTime(ratesData.timestamp);
+      setCacheAge(ratesData.age);
+      
+      if (ratesData.error) {
+        setUpdateError(ratesData.error);
+      }
+      
+    } catch (error) {
+      console.log('Error updating rates:', error);
+      setUpdateError('Error al actualizar tasas');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const addFavoriteCurrency = newCurrency => {
@@ -152,6 +188,10 @@ export default function App() {
                 updateTheme={updateTheme}
                 updateRates={updateRates}
                 lastRates={lastRates}
+                isLoading={isLoading}
+                isFromCache={isFromCache}
+                cacheAge={cacheAge}
+                updateError={updateError}
                 clearAppData={clearAppData}
               />
             </Fragment>
