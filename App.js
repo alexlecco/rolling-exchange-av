@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import moment from 'moment'
 import { StyleSheet, View, StatusBar, Platform, Dimensions } from 'react-native'
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Provider as PaperProvider } from 'react-native-paper'
 import CurrenciesTop from './src/screens/currencies/CurrenciesTop'
 import CurrenciesContainer from './src/screens/currencies/content/CurrenciesContainer'
